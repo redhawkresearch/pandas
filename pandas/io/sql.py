@@ -700,7 +700,7 @@ class SQLTable(PandasObject):
 
     def _execute_insert(self, conn, keys, data_iter):
         data = [dict((k, v) for k, v in zip(keys, row)) for row in data_iter]
-        conn.execute(self.insert_statement(), data)
+        conn.execute(self.insert_statement().values(data))
 
     def insert(self, chunksize=None):
         keys, data_list = self.insert_data()
