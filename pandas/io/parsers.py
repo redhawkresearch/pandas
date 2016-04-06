@@ -1545,10 +1545,11 @@ class PythonParser(ParserBase):
 
         else:
             def _read():
-                line = next(f)
+                it = iter(f)
+                line = next(it)
                 pat = re.compile(sep)
                 yield pat.split(line.strip())
-                for line in f:
+                for line in it:
                     yield pat.split(line.strip())
             reader = _read()
 
