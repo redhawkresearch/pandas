@@ -14,7 +14,8 @@ from pandas.io.common import _is_url, _urlopen
 from pandas.tseries.period import Period
 from pandas import json
 from pandas.compat import (map, zip, reduce, range, lrange, u, add_metaclass,
-                           BytesIO, string_types)from pandas.core import config
+                           BytesIO, string_types)
+from pandas.core import config
 from pandas.core.common import pprint_thing
 import pandas.compat as compat
 import pandas.compat.openpyxl_compat as openpyxl_compat
