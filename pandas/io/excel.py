@@ -13,8 +13,8 @@ from pandas.io.parsers import TextParser
 from pandas.io.common import _is_url, _urlopen
 from pandas.tseries.period import Period
 from pandas import json
-from pandas.compat import map, zip, reduce, range, lrange, u, add_metaclass
-from pandas.core import config
+from pandas.compat import (map, zip, reduce, range, lrange, u, add_metaclass,
+                           BytesIO, string_types)from pandas.core import config
 from pandas.core.common import pprint_thing
 import pandas.compat as compat
 import pandas.compat.openpyxl_compat as openpyxl_compat
@@ -574,7 +574,10 @@ class ExcelWriter(object):
     def __init__(self, path, engine=None,
                  date_format=None, datetime_format=None, **engine_kwargs):
         # validate that this engine can handle the extension
-        ext = os.path.splitext(path)[-1]
+        if isinstance(path, string_types):
+            ext = os.path.splitext(path)[-1]
+        else:
+            ext = 'xls' if engine == 'xlwt' else 'xlsx'
         self.check_extension(ext)
 
         self.path = path
